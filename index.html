@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="toDoApp">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Angular To-do</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+      .complete-true {
+        text-decoration: line-through;
+        color: #c2c2c2;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" ng-controller="ToDo">
+      <h1>Hello, this is my quick and dirty Bootstrap To-Do App</h1>
+      <div class="row">
+        <form ng-submit="createTodo()">
+          <div class="input-group">
+            <input type="text" class="form-control" ng-model="createToDoText">
+            <span class="input-group-btn">
+              <button class="btn btn-primary" type="submit">Add Todo</button>
+            </span>
+          </div>
+        </form>
+      </div>
+      <div class="row">
+        <br />
+        <button class="btn" ng-click="clearDone()">Clear Completed To-Do's</button>
+        <br /><br />
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+          Open To-Do's: <span class="label label-info">{{calculateOpenToDos()}}</span> Closed To-Do's: <span class="label label-danger">{{todos.length - calculateOpenToDos()}}</span>
+          <div class="row" ng-repeat="todo in todos">
+            <label class="checkbox complete-{{todo.complete}}">
+              <input type="checkbox" ng-model="todo.complete"/>
+              {{todo.text}} - {{todo.toDoBy | date : 'short'}}
+            </label>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          Cleared To-Do's: <span class="label label-info">{{toDone.length}}</span>
+          <div class="row" ng-repeat="done in toDone">
+            <label class="checkbox complete-{{done.complete}}">
+              <input type="checkbox" ng-model="done.complete" disabled="disabled" />
+              {{done.text}} - {{done.toDoBy | date : 'short'}}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/filters.js"></script>
+  </body>
+</html>
